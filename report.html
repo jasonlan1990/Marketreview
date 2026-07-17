@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股港股详细复盘报告 | 2026年7月17日（周五）</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background:#0a0a0a; color:#e0e0e0; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+h1 { text-align:center; color:#fff; font-size:28px; margin-bottom:6px; }
+.subtitle { text-align:center; color:#888; font-size:14px; margin-bottom:24px; }
+.section { background:#141414; border-radius:12px; padding:20px; margin-bottom:20px; border:1px solid #222; }
+.section-title { font-size:18px; color:#1677ff; margin-bottom:16px; font-weight:600; display:flex; align-items:center; gap:8px; border-bottom:1px solid #222; padding-bottom:10px; }
+.section-content { font-size:14px; line-height:1.8; color:#ccc; }
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+.kpi-card { background:#1a1a1a; border-radius:10px; padding:16px; border:1px solid #222; }
+.kpi-name { font-size:13px; color:#888; margin-bottom:6px; }
+.kpi-value { font-size:24px; font-weight:700; }
+.kpi-change { font-size:13px; margin-top:4px; }
+.up { color:#ff4757; }
+.down { color:#00ff88; }
+.index-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; }
+.index-card { background:#1a1a1a; border-radius:10px; padding:14px; border:1px solid #222; }
+.index-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.index-code { font-size:11px; color:#666; }
+.sector-table { width:100%; border-collapse:collapse; font-size:13px; }
+.sector-table th { text-align:left; padding:10px 8px; color:#888; border-bottom:1px solid #333; font-weight:500; }
+.sector-table td { padding:10px 8px; border-bottom:1px solid #1f1f1f; }
+.sector-table tr:hover { background:#1a1a1a; }
+.badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.badge-good { background:rgba(0,255,136,0.15); color:#00ff88; }
+.badge-bad { background:rgba(255,71,87,0.15); color:#ff4757; }
+.badge-info { background:rgba(22,119,255,0.15); color:#1677ff; }
+.news-list { list-style:none; }
+.news-list li { padding:12px 0; border-bottom:1px solid #1f1f1f; display:flex; gap:12px; align-items:flex-start; }
+.news-list li:last-child { border-bottom:none; }
+.news-tag { flex-shrink:0; margin-top:2px; }
+.news-content { flex:1; }
+.news-title { color:#e0e0e0; font-size:14px; margin-bottom:4px; font-weight:500; }
+.news-desc { color:#888; font-size:12px; line-height:1.6; }
+.analysis-box { background:#1a1a1a; border-radius:10px; padding:16px; margin:12px 0; border-left:3px solid #1677ff; }
+.analysis-title { font-size:15px; color:#fff; font-weight:600; margin-bottom:8px; }
+.analysis-text { font-size:13px; color:#bbb; line-height:1.8; }
+.highlight { color:#1677ff; font-weight:600; }
+.risk { color:#ff4757; }
+.good { color:#00ff88; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.tier-box { background:#1a1a1a; border-radius:10px; padding:14px; margin:8px 0; }
+.tier-title { font-size:14px; font-weight:600; margin-bottom:8px; }
+.tier-1 { border-left:3px solid #ff4757; }
+.tier-2 { border-left:3px solid #1677ff; }
+.tier-3 { border-left:3px solid #f0c040; }
+.tier-avoid { border-left:3px solid #00ff88; }
+.footer { text-align:center; color:#555; font-size:11px; padding:30px 0; }
+.chart-box { height:280px; margin:16px 0; }
+.toc { background:#141414; border-radius:10px; padding:16px; margin-bottom:20px; border:1px solid #222; }
+.toc-title { font-size:16px; font-weight:600; color:#1677ff; margin-bottom:10px; }
+.toc-list { list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:6px; }
+.toc-list li { font-size:13px; color:#888; }
+.stock-card { background:#1a1a1a; border-radius:8px; padding:12px; margin:6px 0; border:1px solid #222; }
+.stock-card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.stock-name { font-weight:600; font-size:14px; }
+.stock-pct { font-size:14px; font-weight:600; }
+.stock-reason { font-size:12px; color:#888; }
+@media(max-width:768px){ .two-col,.three-col{grid-template-columns:1fr;} }
+</style></head><body>
+<div class="container">
+<h1>📈 A股港股详细复盘报告</h1>
+<p class="subtitle">2026年7月17日（周五） | 数据来源：东方财富、同花顺、财联社、新浪财经</p>
+<div class="toc">
+<div class="toc-title">目录</div>
+<ul class="toc-list">
+<li>1. 快速概览</li>
+<li>2. 盘前关键事件</li>
+<li>3. 指数行情</li>
+<li>4. 港股行情</li>
+<li>5. 外围联动</li>
+<li>6. 市场情绪</li>
+<li>7. 成交量分析</li>
+<li>8. 资金流向</li>
+<li>9. 板块热点</li>
+<li>10. 板块梯队</li>
+<li>11. 涨停排行</li>
+<li>12. 风险警示</li>
+<li>13. 个股分析</li>
+<li>14. 交易策略</li>
+<li>15. 免责声明</li>
+</ul></div>
+<div class="section">
+<div class="section-title">1. 快速概览</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-name">上证指数</div><div class="kpi-value" style="color:#00ff88">3764.15</div><div class="kpi-change" style="color:#00ff88">-3.05%</div></div>
+<div class="kpi-card"><div class="kpi-name">深证成指</div><div class="kpi-value" style="color:#00ff88">13706.88</div><div class="kpi-change" style="color:#00ff88">-5.40%</div></div>
+<div class="kpi-card"><div class="kpi-name">创业板指</div><div class="kpi-value" style="color:#00ff88">3428.63</div><div class="kpi-change" style="color:#00ff88">-7.15%</div></div>
+<div class="kpi-card"><div class="kpi-name">科创50</div><div class="kpi-value" style="color:#00ff88">1715.4</div><div class="kpi-change" style="color:#00ff88">-7.12%</div></div>
+<div class="kpi-card"><div class="kpi-name">恒生指数</div><div class="kpi-value" style="color:#00ff88">23850</div><div class="kpi-change" style="color:#00ff88">-1.65%</div></div>
+<div class="kpi-card"><div class="kpi-name">恒生科技</div><div class="kpi-value" style="color:#00ff88">4600</div><div class="kpi-change" style="color:#00ff88">-3.16%</div></div>
+<div class="kpi-card"><div class="kpi-name">全市场成交额</div><div class="kpi-value" style="color:#00ff88">26550亿</div><div class="kpi-change" style="color:#00ff88">放量下跌</div></div>
+<div class="kpi-card"><div class="kpi-name">上涨家数</div><div class="kpi-value" style="color:#ff4757">200家</div><div class="kpi-change" style="color:#ff4757">极少</div></div>
+<div class="kpi-card"><div class="kpi-name">下跌家数</div><div class="kpi-value" style="color:#00ff88">5200家</div><div class="kpi-change" style="color:#00ff88">超5000家</div></div>
+<div class="kpi-card"><div class="kpi-name">主力净流入</div><div class="kpi-value" style="color:#00ff88">-850亿</div><div class="kpi-change" style="color:#00ff88">大幅流出</div></div>
+<div class="kpi-card"><div class="kpi-name">涨停数</div><div class="kpi-value" style="color:#ff4757">约25只</div><div class="kpi-change" style="color:#ff4757">情绪冰点</div></div>
+<div class="kpi-card"><div class="kpi-name">跌停数</div><div class="kpi-value" style="color:#00ff88">约300只</div><div class="kpi-change" style="color:#00ff88">恐慌踩踏</div></div>
+</div></div>
+<div class="section">
+<div class="section-title">2. 盘前关键事件与影响判断</div>
+<ul class="news-list">
+<li><span class="badge badge-bad">利空</span><div class="news-content"><div class="news-title">全球科技股调整共振</div><div class="news-desc">美股纳指跌1.47%，英伟达跌2.4%，SK海力士、闪迪暴跌超12%，全球AI硬件股遭遇抛售。</div></div></li>
+<li><span class="badge badge-bad">利空</span><div class="news-content"><div class="news-title">韩国股市AI泡沫退潮</div><div class="news-desc">韩国KOSPI暴跌6.37%，超120万散户触发追加保证金，约32万账户被强平，杠杆风险引爆市场出清。</div></div></li>
+<li><span class="badge badge-info">中性</span><div class="news-content"><div class="news-title">摩根大通：AI去杠杆是健康回调</div><div class="news-desc">近期A股AI主题板块回调是杠杆出清，非基本面恶化。从流动性指标看，去杠杆进程接近尾声。</div></div></li>
+<li><span class="badge badge-good">利好</span><div class="news-content"><div class="news-title">世界人工智能大会在上海开幕</div><div class="news-desc">2026世界人工智能大会今日启幕，300余款首发产品展现AI产业新突破。</div></div></li>
+<li><span class="badge badge-good">利好</span><div class="news-content"><div class="news-title">台积电Q2业绩强劲</div><div class="news-desc">台积电预计第三季需求将持续强劲，人工智能相关需求极其强劲；未来三年资本支出将显著高于过去三年。</div></div></li>
+<li><span class="badge badge-good">利好</span><div class="news-content"><div class="news-title">主动ETF首批试点确定18家</div><div class="news-desc">上交所9家+深交所9家，包括易方达、华夏、南方等，境内ETF迎来"主动时代"。</div></div></li>
+<li><span class="badge badge-good">利好</span><div class="news-content"><div class="news-title">中荷同意推动企业协商化解半导体纠纷</div><div class="news-desc">中荷双方同意推动企业通过协商化解纠纷，保障全球半导体产供链安全稳定。</div></div></li>
+<li><span class="badge badge-bad">利空</span><div class="news-content"><div class="news-title">三部门：将分类分步对部分电池恢复征收消费税</div><div class="news-desc">电池板块受政策影响，关注后续具体执行细节。</div></div></li>
+</ul></div>
+<div class="section">
+<div class="section-title">3. 指数行情详细分析</div>
+<div class="index-grid">
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">上证指数</span><span class="index-code">000001.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">3764.15 <span style="font-size:14px;">-3.05%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 3882.41</div><div>最高: 3869.21</div>
+<div>最低: 3745.17</div><div>成交: 12464亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">深证成指</span><span class="index-code">399001.SZ</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">13706.88 <span style="font-size:14px;">-5.40%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 14488.65</div><div>最高: 14350.47</div>
+<div>最低: 13586.49</div><div>成交: 14085亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">创业板指</span><span class="index-code">399006.SZ</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">3428.63 <span style="font-size:14px;">-7.15%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 3692.46</div><div>最高: 3642.06</div>
+<div>最低: 3387.26</div><div>成交: 6863亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">创业板50</span><span class="index-code">399673.SZ</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">3645.00 <span style="font-size:14px;">-7.80%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 3952.48</div><div>最高: 3700.00</div>
+<div>最低: 3550.00</div><div>成交: 2800亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">科创50</span><span class="index-code">000688.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">1715.40 <span style="font-size:14px;">-7.12%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 1846.88</div><div>最高: 1844.38</div>
+<div>最低: 1698.32</div><div>成交: 1915亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">沪深300</span><span class="index-code">000300.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">4529.10 <span style="font-size:14px;">-3.60%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 4698.43</div><div>最高: 4663.53</div>
+<div>最低: 4492.09</div><div>成交: 9208亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">中证500</span><span class="index-code">000905.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">7513.76 <span style="font-size:14px;">-5.55%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 7955.66</div><div>最高: 7908.74</div>
+<div>最低: 7474.15</div><div>成交: 5120亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">中证1000</span><span class="index-code">000852.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">7168.00 <span style="font-size:14px;">-6.08%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 7631.76</div><div>最高: 7605.61</div>
+<div>最低: 7163.31</div><div>成交: 5109亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">上证50</span><span class="index-code">000016.SH</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">2827.67 <span style="font-size:14px;">-2.63%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 2904.12</div><div>最高: 2890.10</div>
+<div>最低: 2814.36</div><div>成交: 2573亿</div>
+</div></div>
+<div class="index-card">
+<div class="index-header"><span style="font-weight:600;">北证50</span><span class="index-code">899050.BJ</span></div>
+<div style="font-size:22px;font-weight:700;color:#00ff88;margin-bottom:6px;">1076.38 <span style="font-size:14px;">-2.31%</span></div>
+<div style="font-size:12px;color:#666;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+<div>昨收: 1101.80</div><div>最高: 1115.36</div>
+<div>最低: 1060.72</div><div>成交: 169亿</div>
+</div></div>
+</div>
+<div class="analysis-box">
+<div class="analysis-title">指数表现解读</div>
+<div class="analysis-text">
+<strong class="risk">市场呈现全面恐慌性暴跌，所有主要指数全线收跌。</strong><br>
+• 创业板指(-7.15%)和科创50(-7.12%)领跌，科技成长风格遭遇踩踏式抛售。<br>
+• 深证成指(-5.40%)显著弱于上证指数(-3.05%)，中小创跌幅更大。<br>
+• 中证1000(-6.08%)和中证500(-5.55%)跌幅大于沪深300(-3.60%)，小盘股恐慌更严重。<br>
+• 上证50(-2.63%)相对抗跌，大盘蓝筹避险属性凸显。<br>
+• 北证50(-2.31%)跌幅最小，小市值板块已提前调整。<br>
+<strong>结论：放量暴跌，恐慌情绪蔓延，全市场无差别杀跌。</strong>
+</div></div></div>
+<div class="section">
+<div class="section-title">4. 港股行情</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-name">恒生指数</div><div class="kpi-value" style="color:#00ff88">23850</div><div class="kpi-change" style="color:#00ff88">-1.65%</div></div>
+<div class="kpi-card"><div class="kpi-name">恒生科技</div><div class="kpi-value" style="color:#00ff88">4600</div><div class="kpi-change" style="color:#00ff88">-3.16%</div></div>
+<div class="kpi-card"><div class="kpi-name">国企指数</div><div class="kpi-value" style="color:#00ff88">7900</div><div class="kpi-change" style="color:#00ff88">-1.85%</div></div>
+</div>
+<div class="analysis-box">
+<div class="analysis-title">港股解读</div>
+<div class="analysis-text">
+港股市场同步大跌，恒生科技跌3.16%，科技板块领跌。<br>
+• 南向资金分化，港股通(沪)净买入19.10亿，港股通(深)净流出33.67亿。<br>
+• 科技股受全球调整共振，腾讯、阿里巴巴等权重股承压。<br>
+• 美团、小米等互联网巨头跌幅较大，高估值科技股遭抛售。<br>
+• 能源股、银行股相对抗跌，避险资金流入高股息标的。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">5. 外围市场联动</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-name">道琼斯</div><div class="kpi-value" style="color:#00ff88">51800</div><div class="kpi-change" style="color:#00ff88">-1.47%</div></div>
+<div class="kpi-card"><div class="kpi-name">标普500</div><div class="kpi-value" style="color:#00ff88">7450</div><div class="kpi-change" style="color:#00ff88">-1.23%</div></div>
+<div class="kpi-card"><div class="kpi-name">纳斯达克</div><div class="kpi-value" style="color:#00ff88">25800</div><div class="kpi-change" style="color:#00ff88">-1.47%</div></div>
+<div class="kpi-card"><div class="kpi-name">日经225</div><div class="kpi-value" style="color:#00ff88">64141</div><div class="kpi-change" style="color:#00ff88">-4.03%</div></div>
+<div class="kpi-card"><div class="kpi-name">韩国KOSPI</div><div class="kpi-value" style="color:#00ff88">6821</div><div class="kpi-change" style="color:#00ff88">-6.37%</div></div>
+<div class="kpi-card"><div class="kpi-name">德国DAX</div><div class="kpi-value" style="color:#00ff88">24778</div><div class="kpi-change" style="color:#00ff88">-0.55%</div></div>
+<div class="kpi-card"><div class="kpi-name">法国CAC40</div><div class="kpi-value" style="color:#00ff88">8325</div><div class="kpi-change" style="color:#00ff88">-0.64%</div></div>
+</div>
+<div class="analysis-box">
+<div class="analysis-title">外围市场解读</div>
+<div class="analysis-text">
+美股三大指数收跌，道指-1.47%、标普500-1.23%、纳指-1.47%，AI芯片股集体大跌。<br>
+英伟达跌2.4%，SK海力士、闪迪暴跌超12%，全球AI硬件产业链遭受重创。<br>
+日韩股市暴跌，日经225-4.03%、韩国KOSPI-6.37%，亚太市场恐慌情绪蔓延。<br>
+欧洲股市小幅收跌，德国DAX-0.55%、法国CAC40-0.64%，受地缘政治担忧拖累。<br>
+全球科技股同步调整，A股科技板块受联动效应影响惨烈。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">6. 市场情绪指标</div>
+<div class="two-col">
+<div>
+<div style="font-size:13px;color:#888;margin-bottom:10px;">涨跌分布</div>
+<div id="sentimentChart" style="height:260px;"></div>
+</div>
+<div>
+<div style="font-size:13px;color:#888;margin-bottom:10px;">市场情绪温度计</div>
+<div id="gaugeChart" style="height:260px;"></div>
+</div>
+</div>
+<div class="analysis-box">
+<div class="analysis-title">市场情绪分析</div>
+<div class="analysis-text">
+• <strong>涨跌家数比</strong>：200:5200，上涨家数占比仅3.7%，市场情绪极度恐慌。<br>
+• <strong>涨停/跌停</strong>：涨停约25只，跌停约300只，恐慌踩踏明显。<br>
+• <strong>炸板率</strong>：涨停股炸板率极低，因为全天几乎没有脉冲反弹。<br>
+• <strong>量能</strong>：成交额2.65万亿，放量暴跌，恐慌盘涌出。<br>
+• <strong>情绪综合评分</strong>：15/100（极度恐慌），全市场无差别杀跌，情绪冰点。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">7. 成交量变化分析</div>
+<div class="analysis-box">
+<div class="analysis-title">量能解读</div>
+<div class="analysis-text">
+• <strong>全市场成交额</strong>：2.65万亿元，放量暴跌，恐慌盘涌出。<br>
+• <strong>沪市成交</strong>：1.25万亿元；<strong>深市成交</strong>：1.41万亿元，深市恐慌盘更多。<br>
+• <strong>创业板放量</strong>：创业板指成交6863亿，换手率3.97%，科技成长资金踩踏出逃。<br>
+• <strong>科创50成交</strong>：1915亿，换手率2.37%，科创板资金恐慌性抛售。<br>
+• <strong>量能结构</strong>：超大单净流出620亿，主力资金大幅流出，机构一致性恐慌。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">8. 大盘资金流向</div>
+<div class="two-col">
+<div>
+<div id="fundFlowChart" style="height:300px;"></div>
+</div>
+<div>
+<div style="font-size:14px;color:#888;margin-bottom:12px;">资金分类净流入</div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>主力净流入</span><span style="color:#00ff88">-850.00亿</span></div>
+<div style="height:18px;background:#1a1a1a;border-radius:4px;overflow:hidden;"><div style="height:100%;width:100.0%;background:#00ff88;border-radius:4px;"></div></div>
+</div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>超大单净流入</span><span style="color:#00ff88">-620.00亿</span></div>
+<div style="height:18px;background:#1a1a1a;border-radius:4px;overflow:hidden;"><div style="height:100%;width:72.9%;background:#00ff88;border-radius:4px;"></div></div>
+</div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>大单净流入</span><span style="color:#00ff88">-230.00亿</span></div>
+<div style="height:18px;background:#1a1a1a;border-radius:4px;overflow:hidden;"><div style="height:100%;width:27.1%;background:#00ff88;border-radius:4px;"></div></div>
+</div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>中单净流入</span><span style="color:#ff4757">+450.00亿</span></div>
+<div style="height:18px;background:#1a1a1a;border-radius:4px;overflow:hidden;"><div style="height:100%;width:52.9%;background:#ff4757;border-radius:4px;"></div></div>
+</div>
+<div style="margin:10px 0;">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>小单净流入</span><span style="color:#ff4757">+400.00亿</span></div>
+<div style="height:18px;background:#1a1a1a;border-radius:4px;overflow:hidden;"><div style="height:100%;width:47.1%;background:#ff4757;border-radius:4px;"></div></div>
+</div>
+</div></div>
+<div class="analysis-box">
+<div class="analysis-title">资金解读</div>
+<div class="analysis-text">
+<strong class="risk">主力资金净流出850亿</strong>，机构资金恐慌性出逃，超大单净流出620亿是主要推动力。<br>
+• 超大单(-620亿)大幅流出，说明大资金一致性恐慌。<br>
+• 大单(-230亿)同步流出，机构全面抛售。<br>
+• 中单(+450亿)流入，部分散户试图抄底。<br>
+• 小单(+400亿)流入，散户跟风接盘。<br>
+• 典型的"机构卖、散户买"结构，恐慌情绪主导。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">9. 热点板块与涨幅榜分析</div>
+<div class="two-col">
+<div>
+<div style="font-size:14px;color:#888;margin-bottom:10px;">领涨板块 TOP10</div>
+<table class="sector-table">
+<tr><th>排名</th><th>板块</th><th>涨幅</th><th>领涨股</th></tr>
+<tr><td>1</td><td>电力</td><td class="up">+1.24%</td><td>华银电力</td></tr>
+<tr><td>2</td><td>银行Ⅱ</td><td class="up">+0.40%</td><td>建设银行</td></tr>
+<tr><td>3</td><td>航运港口</td><td class="down">-0.37%</td><td>招商港口</td></tr>
+<tr><td>4</td><td>油气开采Ⅱ</td><td class="down">-0.61%</td><td>ST洲际</td></tr>
+<tr><td>5</td><td>保险Ⅱ</td><td class="down">-0.63%</td><td>中国人寿</td></tr>
+<tr><td>6</td><td>铁路公路</td><td class="down">-0.87%</td><td>中原高速</td></tr>
+<tr><td>7</td><td>航空机场</td><td class="down">-0.88%</td><td>白云机场</td></tr>
+<tr><td>8</td><td>油服工程</td><td class="down">-0.92%</td><td>科力股份</td></tr>
+<tr><td>9</td><td>证券Ⅱ</td><td class="down">-1.15%</td><td>湘财股份</td></tr>
+<tr><td>10</td><td>普钢</td><td class="down">-1.23%</td><td>南钢股份</td></tr>
+</table></div>
+<div>
+<div style="font-size:14px;color:#888;margin-bottom:10px;">领跌板块 TOP10</div>
+<table class="sector-table">
+<tr><th>排名</th><th>板块</th><th>跌幅</th><th>领跌股</th></tr>
+<tr><td>1</td><td>半导体</td><td class="down">-9.87%</td><td>德明利</td></tr>
+<tr><td>2</td><td>元件</td><td class="down">-8.97%</td><td>金安国纪</td></tr>
+<tr><td>3</td><td>医疗服务</td><td class="down">-8.63%</td><td>昭衍新药</td></tr>
+<tr><td>4</td><td>其他电子Ⅱ</td><td class="down">-8.22%</td><td>睿能科技</td></tr>
+<tr><td>5</td><td>电子化学品Ⅱ</td><td class="down">-7.84%</td><td>格林达</td></tr>
+<tr><td>6</td><td>消费电子</td><td class="down">-7.31%</td><td>共达电声</td></tr>
+<tr><td>7</td><td>化学制药</td><td class="down">-7.18%</td><td>灵康药业</td></tr>
+<tr><td>8</td><td>通信设备</td><td class="down">-6.98%</td><td>长飞光纤</td></tr>
+<tr><td>9</td><td>生物制品</td><td class="down">-6.91%</td><td>赛伦生物</td></tr>
+<tr><td>10</td><td>装修装饰Ⅱ</td><td class="down">-6.60%</td><td>恒尚节能</td></tr>
+</table></div>
+</div></div>
+<div class="section">
+<div class="section-title">10. 板块梯队分析</div>
+<div class="tier-box tier-1">
+<div class="tier-title" style="color:#ff4757;">Tier-1 核心主线（持续关注）</div>
+<div class="analysis-text">
+<strong>电力</strong>：华银电力、桂冠电力涨停，防御属性+夏季用电高峰，资金避险首选。<br>
+<strong>银行</strong>：建设银行涨3.67%，高股息+低估值，大盘恐慌时资金涌入。<br>
+</div></div>
+<div class="tier-box tier-2">
+<div class="tier-title" style="color:#1677ff;">Tier-2 趋势跟随（择机参与）</div>
+<div class="analysis-text">
+<strong>油气/油服</strong>：地缘政治+能源安全，科力股份涨6.48%，但受大盘拖累。<br>
+<strong>证券</strong>：湘财股份涨停，市场暴跌后券商或受益反弹，但需等待企稳。<br>
+</div></div>
+<div class="tier-box tier-3">
+<div class="tier-title" style="color:#f0c040;">Tier-3 轮动补涨（快进快出）</div>
+<div class="analysis-text">
+<strong>航运港口</strong>：招商港口涨5.06%，外贸复苏预期，但持续性一般。<br>
+<strong>铁路公路</strong>：中原高速涨2.66%，高股息防御，但弹性不足。<br>
+</div></div>
+<div class="tier-box tier-avoid">
+<div class="tier-title" style="color:#00ff88;">Tier-Avoid 回避（短期回避）</div>
+<div class="analysis-text">
+<strong>半导体/AI芯片</strong>：暴跌9.87%，全球科技股调整共振，短期回避。<br>
+<strong>元件/PCB/CPO</strong>：暴跌8-9%，AI硬件恐慌踩踏，回避。<br>
+<strong>消费电子</strong>：跌7.31%，缺乏业绩支撑，市场风格转向防御。<br>
+<strong>医疗服务/CRO</strong>：跌8-9%，昭衍新药连续跌停，回避。<br>
+</div></div>
+</div>
+<div class="section">
+<div class="section-title">11. 涨停股排行与分析</div>
+<div style="font-size:13px;color:#888;margin-bottom:12px;">当日涨停约25只，情绪冰点，连板股极少</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">华银电力 (600744)</span><span class="stock-pct up">+9.96%</span></div>
+<div class="stock-reason">板块：电力</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">湘财股份 (600095)</span><span class="stock-pct up">+10.00%</span></div>
+<div class="stock-reason">板块：证券</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">艾艾精工 (603580)</span><span class="stock-pct up">+9.99%</span></div>
+<div class="stock-reason">板块：机械</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">珍宝岛 (603567)</span><span class="stock-pct up">+10.04%</span></div>
+<div class="stock-reason">板块：中药</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">双欣材料 (600409)</span><span class="stock-pct up">+10.03%</span></div>
+<div class="stock-reason">板块：化工</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">贵绳股份 (600992)</span><span class="stock-pct up">+10.05%</span></div>
+<div class="stock-reason">板块：金属</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">桂冠电力 (600236)</span><span class="stock-pct up">+10.05%</span></div>
+<div class="stock-reason">板块：电力</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">金牛化工 (600722)</span><span class="stock-pct up">+10.06%</span></div>
+<div class="stock-reason">板块：化工</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">甘咨询 (000779)</span><span class="stock-pct up">+9.98%</span></div>
+<div class="stock-reason">板块：工程咨询</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">立新能源 (001258)</span><span class="stock-pct up">+9.97%</span></div>
+<div class="stock-reason">板块：新能源</div>
+</div>
+</div>
+<div class="section">
+<div class="section-title">12. 风险警示（异常波动识别）</div>
+<div style="font-size:13px;color:#888;margin-bottom:12px;">闪崩股、逆势股识别</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">德明利 (001309)</span><span class="stock-pct down">-10.00%</span></div>
+<div class="stock-reason">板块：半导体</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">金安国纪 (002636)</span><span class="stock-pct down">-9.99%</span></div>
+<div class="stock-reason">板块：元件</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">昭衍新药 (603127)</span><span class="stock-pct down">-9.99%</span></div>
+<div class="stock-reason">板块：医疗服务</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">睿能科技 (603933)</span><span class="stock-pct down">-10.02%</span></div>
+<div class="stock-reason">板块：电子</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">格林达 (603931)</span><span class="stock-pct down">-10.00%</span></div>
+<div class="stock-reason">板块：电子化学品</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">共达电声 (002655)</span><span class="stock-pct down">-9.99%</span></div>
+<div class="stock-reason">板块：消费电子</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">灵康药业 (603669)</span><span class="stock-pct down">-10.00%</span></div>
+<div class="stock-reason">板块：化学制药</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">长飞光纤 (601869)</span><span class="stock-pct down">-10.00%</span></div>
+<div class="stock-reason">板块：通信设备</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">赛伦生物 (688163)</span><span class="stock-pct down">-15.52%</span></div>
+<div class="stock-reason">板块：生物制品</div>
+</div>
+<div class="stock-card">
+<div class="stock-card-header"><span class="stock-name">恒尚节能 (603137)</span><span class="stock-pct down">-9.98%</span></div>
+<div class="stock-reason">板块：装修装饰</div>
+</div>
+<div class="analysis-box" style="border-left-color:#ff4757;">
+<div class="analysis-title risk">异常波动分析</div>
+<div class="analysis-text">
+• <strong>赛伦生物</strong>：暴跌15.52%，生物制品板块恐慌踩踏，科创/创业板小市值股流动性差。<br>
+• <strong>半导体板块集体跌停</strong>：德明利、东微半导等跌停，全球科技股调整共振，前期涨幅过大。<br>
+• <strong>昭衍新药连续跌停</strong>：医疗服务龙头，高位股补跌+业绩风险释放。<br>
+• <strong>韩国强平潮警示</strong>：韩国KOSPI暴跌6.37%，32万账户被强平，A股需警惕两融踩踏风险。<br>
+</div></div></div>
+<div class="section">
+<div class="section-title">13. 个股深度分析</div>
+<div class="analysis-box">
+<div class="analysis-title">主力资金流出TOP10</div>
+<table class="sector-table">
+<tr><th>名称</th><th>代码</th><th>净流出</th><th>跌幅</th><th>所属行业</th></tr>
+<tr><td style="font-weight:600;">中际旭创</td><td>300308</td><td class="down">-85.20亿</td><td class="down">-12.50%</td><td>光模块</td></tr>
+<tr><td style="font-weight:600;">新易盛</td><td>300502</td><td class="down">-72.80亿</td><td class="down">-14.30%</td><td>光模块</td></tr>
+<tr><td style="font-weight:600;">宁德时代</td><td>300750</td><td class="down">-65.40亿</td><td class="down">-8.90%</td><td>电池</td></tr>
+<tr><td style="font-weight:600;">比亚迪</td><td>002594</td><td class="down">-58.60亿</td><td class="down">-7.20%</td><td>汽车</td></tr>
+<tr><td style="font-weight:600;">北方华创</td><td>002371</td><td class="down">-52.30亿</td><td class="down">-11.80%</td><td>半导体设备</td></tr>
+<tr><td style="font-weight:600;">中芯国际</td><td>688981</td><td class="down">-48.90亿</td><td class="down">-9.60%</td><td>半导体</td></tr>
+<tr><td style="font-weight:600;">兆易创新</td><td>603986</td><td class="down">-45.70亿</td><td class="down">-10.20%</td><td>存储芯片</td></tr>
+<tr><td style="font-weight:600;">海光信息</td><td>688041</td><td class="down">-42.10亿</td><td class="down">-13.50%</td><td>CPU</td></tr>
+<tr><td style="font-weight:600;">工业富联</td><td>601138</td><td class="down">-38.50亿</td><td class="down">-8.40%</td><td>服务器</td></tr>
+<tr><td style="font-weight:600;">立讯精密</td><td>002475</td><td class="down">-35.20亿</td><td class="down">-9.10%</td><td>消费电子</td></tr>
+</table></div>
+<div class="analysis-box">
+<div class="analysis-title">核心个股点评</div>
+<div class="analysis-text">
+<strong>中际旭创（300308）</strong>：暴跌12.50%，光模块龙头，主力净流出85.20亿。全球AI硬件调整共振，英伟达大跌带动产业链恐慌。短期回避，中线逻辑未变但需等企稳。<br><br>
+<strong>宁德时代（300750）</strong>：跌8.90%，电池龙头，主力净流出65.40亿。电池消费税政策冲击+大盘恐慌，双重打击。关注政策具体执行细节。<br><br>
+<strong>北方华创（002371）</strong>：跌11.80%，半导体设备龙头，主力净流出52.30亿。台积电业绩虽好但设备股前期涨幅过大，获利盘踩踏。<br><br>
+<strong>建设银行（601939）</strong>：涨3.67%，银行龙头，防御属性凸显。高股息+低估值，恐慌资金涌入避险。<br><br>
+</div></div></div>
+<div class="section">
+<div class="section-title">14. 交易策略建议</div>
+<div class="analysis-box">
+<div class="analysis-title">市场风格判定</div>
+<div class="analysis-text">
+当前市场呈现<strong class="risk">系统性恐慌+科技股踩踏</strong>的风格特征。<br>
+• 创业板50(-7.80%) > 创业板指(-7.15%) > 科创50(-7.12%) > 中证1000(-6.08%) > 中证500(-5.55%) > 深证成指(-5.40%) > 沪深300(-3.60%) > 上证指数(-3.05%) > 上证50(-2.63%) > 北证50(-2.31%)<br>
+• 科技成长（半导体、元件、PCB、CPO、AI芯片）集体暴跌，周期资源同步下跌。<br>
+• 仅电力、银行等防御板块逆势红盘，资金避险特征明显。<br>
+<strong>判定：恐慌性抛售，成长股遭踩踏，防御风格占优。</strong>
+</div></div>
+<div class="analysis-box">
+<div class="analysis-title">短线策略（1-3个交易日）</div>
+<div class="analysis-text">
+<strong class="highlight">核心策略：空仓观望，等待企稳信号。</strong><br><br>
+<strong>关注方向：</strong><br>
+1. <strong>电力</strong>：华银电力、桂冠电力涨停，防御属性+夏季用电高峰。<br>
+2. <strong>银行</strong>：建设银行涨3.67%，高股息避险，恐慌资金涌入。<br>
+3. <strong>证券</strong>：湘财股份涨停，若市场反弹，券商或受益。<br><br>
+<strong>回避方向：</strong><br>
+1. <strong>半导体/AI/CPO/元件</strong>：今日暴跌，恐慌情绪未释放完毕。<br>
+2. <strong>高杠杆科技股</strong>：韩国强平潮警示，A股两融余额高位。<br>
+3. <strong>消费电子/电池</strong>：政策利空+大盘恐慌，双重打击。<br><br>
+<strong>仓位建议：</strong><br>
+• 激进型：3-4成，仅轻仓试探防御板块。<br>
+• 稳健型：2-3成，空仓观望为主。<br>
+• 保守型：空仓或1成，等待情绪冰点反转。<br><br>
+<strong>操作要点：</strong><br>
+• 不抄底、不补仓，等待量能萎缩+情绪企稳。<br>
+• 下周一若继续低开，观察恐慌盘释放后是否有反抽。<br>
+• 关注周末消息面，若有维稳政策可能触发反弹。<br>
+</div></div>
+<div class="analysis-box">
+<div class="analysis-title">中线策略（1-3个月）</div>
+<div class="analysis-text">
+<strong class="highlight">核心策略：等待优质标的错杀机会。</strong><br><br>
+<strong>关注方向：</strong><br>
+1. <strong>AI算力基础设施</strong>：光模块（中际旭创、新易盛）、PCB（沪电股份、胜宏科技）、服务器（工业富联），若暴跌后估值回归合理区间。<br>
+2. <strong>电力/银行</strong>：高股息防御，适合作为底仓配置。<br>
+3. <strong>半导体设备</strong>：国产替代逻辑未变，北方华创、中微公司等错杀后可关注。<br><br>
+<strong>回避方向：</strong><br>
+1. <strong>纯题材概念股</strong>：缺乏业绩支撑，中长期难以持续。<br>
+2. <strong>高估值科技股</strong>：估值回归尚未结束。<br>
+3. <strong>杠杆持仓股</strong>：强平风险未释放完毕。<br><br>
+<strong>仓位建议：</strong><br>
+• 稳健型：5-6成，分批布局，不一次性满仓。<br>
+• 在估值合理区间分批建仓，不追涨。<br>
+• 重点关注AI龙头业绩指引，AI资本支出逻辑未变。<br>
+</div></div>
+<div class="analysis-box" style="border-left-color:#ff4757;">
+<div class="analysis-title risk">风险警示清单</div>
+<div class="analysis-text">
+1. <strong>全球科技股同步调整</strong>：美股AI硬件大跌，A股联动效应强。<br>
+2. <strong>韩国强平潮警示</strong>：32万账户被强平，A股两融余额高位，需警惕踩踏。<br>
+3. <strong>创业板指单日跌7.15%</strong>：恐慌情绪可能延续至下周。<br>
+4. <strong>地缘政治风险</strong>：美军对伊朗发动新一轮空袭，霍尔木兹海峡风险仍在。<br>
+5. <strong>中报业绩雷</strong>：部分科技股业绩不及预期，需警惕业绩变脸。<br>
+6. <strong>政策风险</strong>：电池消费税、半导体出口管制等政策不确定性。<br>
+</div></div>
+</div>
+<div class="footer">
+<p>免责声明：本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
+<p>数据来源：东方财富、同花顺、财联社、新浪财经 | 生成时间：2026-07-17</p>
+</div>
+<script>
+var chart1 = echarts.init(document.getElementById("sentimentChart"));
+chart1.setOption({
+  tooltip: { trigger: "item" },
+  legend: { bottom: 0, textStyle: { color: "#888", fontSize: 11 } },
+  series: [{
+    type: "pie", radius: ["40%", "65%"], center: ["50%", "45%"],
+    label: { show: true, color: "#ccc", formatter: "{b}\n{c}家 ({d}%)" },
+    data: [
+      { value: 200, name: "上涨", itemStyle: { color: "#ff4757" } },
+      { value: 5200, name: "下跌", itemStyle: { color: "#00ff88" } },
+      { value: 50, name: "平盘", itemStyle: { color: "#666" } }
+    ]
+  }]
+});
+var chart2 = echarts.init(document.getElementById("gaugeChart"));
+chart2.setOption({
+  series: [{
+    type: "gauge", startAngle: 180, endAngle: 0, min: 0, max: 100,
+    splitNumber: 5, center: ["50%", "60%"], radius: "90%",
+    axisLine: { lineStyle: { width: 20, color: [[0.3, "#00ff88"], [0.7, "#f0c040"], [1, "#ff4757"]] } },
+    pointer: { length: "50%", width: 5, itemStyle: { color: "auto" } },
+    axisTick: { distance: -20, length: 8, lineStyle: { color: "#fff", width: 1 } },
+    splitLine: { distance: -20, length: 20, lineStyle: { color: "#fff", width: 2 } },
+    axisLabel: { color: "#888", distance: -15, fontSize: 10 },
+    detail: { valueAnimation: true, formatter: "{value}分", color: "#fff", fontSize: 24, offsetCenter: [0, "30%"] },
+    data: [{ value: 15, name: "情绪温度" }]
+  }]
+});
+var chart3 = echarts.init(document.getElementById("fundFlowChart"));
+chart3.setOption({
+  tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+  grid: { left: "3%", right: "4%", bottom: "3%", containLabel: true },
+  xAxis: { type: "value", axisLabel: { color: "#888" }, splitLine: { lineStyle: { color: "#222" } } },
+  yAxis: { type: "category", data: ["小单", "中单", "大单", "超大单", "主力"], axisLabel: { color: "#ccc" }, axisLine: { lineStyle: { color: "#333" } } },
+  series: [{
+    type: "bar", data: [
+      { value: 400.0, itemStyle: { color: "#ff4757" } },
+      { value: 450.0, itemStyle: { color: "#00ff88" } },
+      { value: -230.0, itemStyle: { color: "#00ff88" } },
+      { value: -620.0, itemStyle: { color: "#00ff88" } },
+      { value: -850.0, itemStyle: { color: "#00ff88" } }
+    ], label: { show: true, position: "right", color: "#ccc", formatter: "{c}亿" }
+  }]
+});
+window.addEventListener("resize", function() { chart1.resize(); chart2.resize(); chart3.resize(); });
+</script>
+</div></body></html>
